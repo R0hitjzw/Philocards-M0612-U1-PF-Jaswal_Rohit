@@ -111,13 +111,21 @@ function crearTarjetas(filosofos) {
 
         }
 
+        // --->AQUÍ VA EL NOU CODI<---
+        let deleteCard = document.createElement('div'); // DIV X para eliminar tarjeta
+        deleteCard.innerHTML="&#x2716";
+        deleteCard.classList.add('botonEliminar');
+        deleteCard.addEventListener('click', eliminarTarjeta); // 'click'
+        tarjeta.append(deleteCard)
+
         // Añadimos tarjeta creada al contenedor de tarjetas
         let contenedor = document.querySelector('.cards-container');
         contenedor.append(tarjeta);
     })
 }
 
-function eliminarTarjeta() {
+function eliminarTarjeta(event) {  
+    event.target.parentElement.remove(); // ELIMINAR TARJETA
 }
 
 function ordenarNombreAZ() {
