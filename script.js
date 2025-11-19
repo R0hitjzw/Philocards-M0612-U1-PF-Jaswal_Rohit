@@ -106,14 +106,14 @@ function crearTarjetas(filosofos) {
 
             let skillLevel = document.createElement('div'); // NIVEL DE HABILIDAD INDICADO SOBRE LA BARRA
             skillLevel.classList.add('level');
-            skillLevel.style= `width: ${(infoHabilidad.nivel * 100)/4}%;`;
-            skillBar.append(skillLevel); 
+            skillLevel.style = `width: ${(infoHabilidad.nivel * 100) / 4}%;`;
+            skillBar.append(skillLevel);
 
         }
 
         // --->AQUÍ VA EL NOU CODI<---
         let deleteCard = document.createElement('div'); // DIV X para eliminar tarjeta
-        deleteCard.innerHTML="&#x2716";
+        deleteCard.innerHTML = "&#x2716";
         deleteCard.classList.add('botonEliminar');
         deleteCard.addEventListener('click', eliminarTarjeta); // 'click'
         tarjeta.append(deleteCard)
@@ -124,7 +124,7 @@ function crearTarjetas(filosofos) {
     })
 }
 
-function eliminarTarjeta(event) {  
+function eliminarTarjeta(event) {
     event.target.parentElement.remove(); // ELIMINAR TARJETA
 }
 
@@ -154,9 +154,22 @@ function crearNuevaTarjeta(event) {
     nuevoFilosofo.imagen = document.querySelector('.create-card-form .foto').value;
     nuevoFilosofo.pais = {};
     nuevoFilosofo.pais.nombre = document.querySelector('.create-card-form .pais').value;
-    // Completar la función
 
-    // crearTarjetas(nuevoFilosofo);
+    // Completar la función
+    nuevoFilosofo.pais.bandera = document.querySelector('.create-card-form .bandera').value;
+    nuevoFilosofo.corriente = document.querySelector('.create-card-form .corriente').value;
+    nuevoFilosofo.arma = document.querySelector('.create-card-form .arma').value;
+
+    let skills = document.querySelectorAll('.create-card-form .skills');
+
+    nuevoFilosofo.habilidades = [
+        { habilidad: "Sabiduría", nivel: skills[0].value},
+        { habilidad: "Oratoria", nivel: skills[1].value},
+        { habilidad: "Lógica", nivel: skills[2].value},
+        { habilidad: "Innovación", nivel: skills[3].value}
+    ];
+
+    crearTarjetas([nuevoFilosofo]);
 }
 
 function parsearTarjetas(tarjetas) {
