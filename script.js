@@ -10,6 +10,14 @@ window.onload = () => {
     let botones = document.querySelectorAll('.sort-btn');
     botones[0].addEventListener('click', ordenarNombreAZ);
     botones[1].addEventListener('click', ordenarNombreZA);
+
+
+    // GUARDAR TARJETAS
+    let saveTarjetas = document.querySelector('.save-btn');
+    saveTarjetas.addEventListener('click', guardarTarjetas);
+
+    let loadTarjetas = document.querySelector('.load-btn');
+    loadTarjetas.addEventListener('click', cargarTarjetas);
 }
 
 function crearTarjetas(filosofos) {
@@ -44,6 +52,7 @@ function crearTarjetas(filosofos) {
         filaInfo.append(infoPais)
 
         let paisOrigenBandera = document.createElement('img') // BANDERA PAIS
+        paisOrigenBandera.classList.add('bandera'); // que m'havia oblidat d'afegir la classe a paisOrigenBandera
         paisOrigenBandera.src = filosofo.pais.bandera;
         infoPais.append(paisOrigenBandera)
 
@@ -62,6 +71,7 @@ function crearTarjetas(filosofos) {
         infoCorriente.append(corrienteTitulo);
 
         let corrienteNombre = document.createElement('span'); // NOMBRE CORRIENTE
+        corrienteNombre.classList.add('corriente');
         corrienteNombre.innerHTML = filosofo.corriente;
         infoCorriente.append(corrienteNombre);
 
@@ -205,13 +215,27 @@ function parsearTarjetas(tarjetas) {
         let filosofo = {};
         filosofo.nombre = tarjeta.querySelector('.nombre').innerHTML;
         filosofo.imagen = tarjeta.querySelector('.photo').src;
+
         filosofo.pais = {};
         // Completar funció
+        filosofo.pais.bandera = tarjeta.querySelector('.info-pais img').src;
+        filosofo.pais.nombre = tarjeta.querySelector('.pais').innerHTML;
 
+        filosofo.corriente= tarjeta.querySelector('.corriente').innerHTML;
+        filosofo.arma = tarjeta.querySelector('.arma').innerHTML;
+
+        filosofo.habilidades=[];
         let habilidades = tarjeta.querySelectorAll('.skill');
         for (let habilidad of habilidades) {
             let habilidadParaGuardar = {};
             // Completar funció
+
+            habilidadParaGuardar.habilidad = habilidad.querySelector('.skill-name').innerHTML;
+
+            habilidad.querySelector('.level').style.width;
+            habilidadParaGuardar.nivel = parseInt(habilidad.querySelector('.level').style.width)/100*4; // peruqe mostri el nivell
+
+            filosofo.habilidades.push(habilidadParaGuardar);
         }
         filosofosParseados.push(filosofo);
     }
@@ -225,6 +249,9 @@ function guardarTarjetas() {
 
 
 function cargarTarjetas() {
+    let contingut = localStorage.getItem('tarjetas');
+    document.querySelector('.cards-container').innerHTML='';
+    crearTarjetas(JSON.parse(contingut));
 }
 
 const filosofos = [
