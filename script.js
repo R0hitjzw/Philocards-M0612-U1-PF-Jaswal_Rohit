@@ -5,6 +5,11 @@ window.onload = () => {
     // Crear handlers para los botones de control
     let botonCrearTarjeta = document.querySelector('.create-btn');
     botonCrearTarjeta.addEventListener('click', crearNuevaTarjeta);
+
+    // BOTONES ORDEN ALFABETICO
+    let botones = document.querySelectorAll('.sort-btn');
+    botones[0].addEventListener('click', ordenarNombreAZ);
+    botones[1].addEventListener('click', ordenarNombreZA);
 }
 
 function crearTarjetas(filosofos) {
@@ -138,13 +143,35 @@ function ordenarNombreAZ() {
 
     // Eliminar totes les targetes de l'array 'tarjeta'
     // Completar codi
+    tarjetas.splice();
 
     // Afegir 'tarjetasOrdenadas' al contenidor de cards
     let contenedor = document.querySelector('.cards-container');
     // Completar codi
+    tarjetasOrdenadas.forEach(tarjeta => {
+       contenedor.appendChild(tarjeta); 
+    });
 }
 
 function ordenarNombreZA() {
+    let tarjetas = Array.from(document.querySelectorAll('.card'));
+    let tarjetasOrdenadas = tarjetas.sort((tarjetaA, tarjetaB) => {
+        let nombre1 = tarjetaA.querySelector('h3').innerHTML;
+        let nombre2 = tarjetaB.querySelector('h3').innerHTML;
+        return nombre2.localeCompare(nombre1);
+    });
+
+    // Eliminar totes les targetes de l'array 'tarjeta'
+    // Completar codi
+    tarjetas.splice();
+
+    // Afegir 'tarjetasOrdenadas' al contenidor de cards
+    let contenedor = document.querySelector('.cards-container');
+    // Completar codi
+    tarjetasOrdenadas.forEach(tarjeta => {
+       contenedor.appendChild(tarjeta); 
+    });
+
 }
 
 function crearNuevaTarjeta(event) {
